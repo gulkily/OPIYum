@@ -10,10 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-sigma/core": "^4.0.2",
+    "@sigma/node-image": "^3.0.0-beta.12",
     "3d-force-graph-vr": "^2.2.5",
+    "canvas-utils": "^0.8.0",
+    "graphology": "^0.25.4",
+    "graphology-layout": "^0.6.1",
+    "graphology-layout-forceatlas2": "^0.10.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.24.1"
+    "react-icons": "^5.2.1",
+    "react-router-dom": "^6.24.1",
+    "sigma": "^3.0.0-beta.24",
+    "vis-network": "^9.1.9"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

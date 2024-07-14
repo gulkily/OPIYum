@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 // Graph.js
 import React, { useState } from 'react';
 import KnowledgeGraph from './KnowledgeGraph';
@@ -9,6 +10,12 @@ import CheckboxList from './CheckboxList'; // Import the CheckboxList component
 import dummy from './dummy.json';
 
 
+=======
+import React, { useEffect, useRef } from 'react';
+import ForceGraphVR from '3d-force-graph-vr';
+//import dummyData from './dummy.json';  // Ensure the path is correct
+import SentientData from './Sentient AI.json';
+>>>>>>> Stashed changes
 
 const Graph = () => {
   const [show3DGraph, setShow3DGraph] = useState(true);
@@ -19,9 +26,15 @@ const Graph = () => {
     return [...new Set(categories)];
   };
 
+<<<<<<< Updated upstream
   const toggleGraph = () => {
     setShow3DGraph(!show3DGraph);
   };
+=======
+  useEffect(() => {
+    if (SentientData && graphRef.current) {
+      const graphData = transformData(SentientData);
+>>>>>>> Stashed changes
 
   const handleSelectionChange = (selectedItems) => {
     setSelectedCategories(selectedItems); // Update the selected categories

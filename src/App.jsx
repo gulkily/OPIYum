@@ -1,10 +1,19 @@
 // App.js
 import React from 'react';
 import Navbar from './components/navbar';
+<<<<<<< Updated upstream
 import backgroundImage from '/Users/aleezajahan/OPIYum/src/midjourney.png';
 import { Route, Routes } from 'react-router-dom';
+=======
+import backgroundImage from '/Users/pranjali/OPIYum/src/midjourney.png';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import SearchBar from './components/SearchBar';
+>>>>>>> Stashed changes
 import Home from './components/Home';
 import Graph from './components/Graph';
+import SimpleGraph from './components/Sigma';
+import SigmaGraph from './components/Sigma2';
+import SentientAIKnowledgeGraph from './components/2DFinal';
 
 function App() {
   
@@ -39,7 +48,7 @@ function App() {
       }}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/graph" element={<Graph />} />
+          <Route path="/graph" element={<SentientAIKnowledgeGraph />} />
         </Routes>
       </div>
       <div className="p-4" style={{ zIndex: 1 }}>
@@ -48,5 +57,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
