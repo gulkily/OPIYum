@@ -2,18 +2,12 @@
 import React from 'react';
 import Navbar from './components/navbar';
 import backgroundImage from '/Users/aleezajahan/OPIYum/src/midjourney.png';
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import SearchBar from './components/SearchBar';
+import { Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import Graph from './components/Graph';
 
 function App() {
-  const navigate = useNavigate();
-
-  const handleSearch = (query) => {
-    console.log(`Search query: ${query}`);
-    navigate('/graph');
-  };
+  
 
   return (
     <div className="App" style={{
@@ -47,7 +41,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/graph" element={<Graph />} />
         </Routes>
-        <SearchBar onSearch={handleSearch} />
       </div>
       <div className="p-4" style={{ zIndex: 1 }}>
         {/* Your other content here */}

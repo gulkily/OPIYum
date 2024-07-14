@@ -1,54 +1,99 @@
-import React, { useEffect, useRef } from 'react';
-import ForceGraphVR from '3d-force-graph-vr';
-import dummyData from './dummy.json';  // Ensure the path is correct
+// Graph.js
+import React, { useState } from 'react';
+import KnowledgeGraph from './KnowledgeGraph';
+import TwoDim from './TwoDim'; // Import the 2D graph component
+import TileContainer from './TileContainer';
+//import AdditionalComponent from './AdditionalComponent';
+//import CheckboxComponent from './CheckboxComponent';
+import CheckboxList from './CheckboxList'; // Import the CheckboxList component
+import dummy from './dummy.json';
+
+
 
 const Graph = () => {
-  const graphRef = useRef();
+  const [show3DGraph, setShow3DGraph] = useState(true);
+  const [selectedCategories, setSelectedCategories] = useState([]); // State to manage selected categories
 
-  const transformData = (data) => {
-    const nodes = [];
-    const links = [];
-    const nodeSet = new Set();
-
-    data.forEach((item) => {
-      const categoryNode = { id: item.category, group: 1 };
-      const expertNode = { id: item.expert, group: 2 };
-      const urlNode = { id: item.url, group: 3 };
-
-      if (!nodeSet.has(categoryNode.id)) {
-        nodes.push(categoryNode);
-        nodeSet.add(categoryNode.id);
-      }
-      if (!nodeSet.has(expertNode.id)) {
-        nodes.push(expertNode);
-        nodeSet.add(expertNode.id);
-      }
-      if (!nodeSet.has(urlNode.id)) {
-        nodes.push(urlNode);
-        nodeSet.add(urlNode.id);
-      }
-
-      links.push({ source: categoryNode.id, target: expertNode.id });
-      links.push({ source: expertNode.id, target: urlNode.id });
-    });
-
-    return { nodes, links };
+  const getUniqueCategories = (data) => {
+    const categories = data.map(item => item.category);
+    return [...new Set(categories)];
   };
 
-  useEffect(() => {
-    if (dummyData && graphRef.current) {
-      const graphData = transformData(dummyData);
+  const toggleGraph = () => {
+    setShow3DGraph(!show3DGraph);
+  };
 
-      const Graph = ForceGraphVR()(graphRef.current)
-        .graphData(graphData)
-        .nodeLabel('id')
-        .nodeAutoColorBy('group')
-        .linkDirectionalParticles(2)
-        .linkDirectionalParticleSpeed((d) => d.value * 0.001);
+  const handleSelectionChange = (selectedItems) => {
+    setSelectedCategories(selectedItems); // Update the selected categories
+  };
+
+  const handleCheckboxChange = (event) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      setSelectedCategories([...selectedCategories, value]);
+    } else {
+      setSelectedCategories(selectedCategories.filter(category => category !== value));
     }
-  }, []);
+  };
 
-  return <div id="3d-graph" ref={graphRef} style={{ width: '100vw', height: '100vh' }} />;
+  //LIST OF CATEGORIES/LENSES
+  const items = ['Option 1', 'Option 2', 'Option 3']; // List of items for the checkbox list
+
+
+  return (
+    <div style={{ width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <TileContainer>
+        <div style={styles.content}>
+          <div style={styles.left}>
+            <CheckboxList items={items} onSelectionChange={handleSelectionChange} /> {/* Add the CheckboxList component */}
+          </div>
+          <div style={styles.right}>
+            {show3DGraph ? <KnowledgeGraph width="100%" height="100%" /> : <TwoDGraph width="100%" height="100%" />}
+          </div>
+        </div>
+        <button onClick={toggleGraph} style={styles.toggleButton}>
+          {show3DGraph ? 'Show 2D Graph' : 'Show 3D Graph'}
+        </button>
+      </TileContainer>
+    </div>
+  );
+};
+
+const styles = {
+  content: {
+    display: 'flex',
+    flexDirection: 'row', // Layout components side by side
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: '100%',
+    width: '100%',
+  },
+  left: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column', // Stack components vertically
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '20px',
+    height: '100%', // Ensure the left side occupies full height
+  },
+  right: {
+    flex: 2, // Adjust the flex value to control the width of the iframe
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '20px',
+    height: '100%', // Ensure the right side occupies full height
+  },
+  toggleButton: {
+    marginTop: '20px',
+    padding: '10px 20px',
+    fontSize: '16px',
+    cursor: 'pointer',
+    backgroundColor: 'white', // Change the background color to white
+    border: '1px solid #ccc', // Add a border if needed
+    borderRadius: '5px', // Optional: add rounded corners
+  },
 };
 
 export default Graph;
