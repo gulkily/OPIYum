@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import Navbar from './components/navbar';
+import SearchBar from './components/SearchBar';
+import backgroundImage from '/Users/aleezajahan/OPIYum/src/midjourney.png';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="App" style={{
+      backgroundImage: `url(${backgroundImage})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      position: 'relative' // Ensure the container is relative for absolute positioning of the overlay
+    }}>
+      {/* Overlay to dim the background */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0, 0, 0, 0.6)' // Black overlay with 50% opacity
+      }}></div>
+      <Navbar />
+      <div style={{
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '20px',
+        zIndex: 1 // Ensure the content is on top of the overlay
+      }}>
+        <h1 style={{
+          color: 'white',
+          textAlign: 'center',
+          fontSize: '4rem',  // Larger font size
+          fontWeight: 'bold',
+          marginBottom: '40px'  // More space below the title
+        }}>
+          Curated for your Curiosity
+        </h1>
+        <SearchBar />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="p-4" style={{ zIndex: 1 }}>
+        {/* Your other content here */}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
