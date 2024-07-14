@@ -1,9 +1,20 @@
+// App.js
 import React from 'react';
 import Navbar from './components/navbar';
-import SearchBar from './components/SearchBar';
 import backgroundImage from '/Users/aleezajahan/OPIYum/src/midjourney.png';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import SearchBar from './components/SearchBar';
+import Home from './components/Home';
+import Graph from './components/Graph';
 
 function App() {
+  const navigate = useNavigate();
+
+  const handleSearch = (query) => {
+    console.log(`Search query: ${query}`);
+    navigate('/graph');
+  };
+
   return (
     <div className="App" style={{
       backgroundImage: `url(${backgroundImage})`,
@@ -12,16 +23,15 @@ function App() {
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
-      position: 'relative' // Ensure the container is relative for absolute positioning of the overlay
+      position: 'relative'
     }}>
-      {/* Overlay to dim the background */}
       <div style={{
         position: 'absolute',
         top: 0,
         left: 0,
         width: '100%',
         height: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 0.6)' // Black overlay with 50% opacity
+        backgroundColor: 'rgba(0, 0, 0, 0.6)'
       }}></div>
       <Navbar />
       <div style={{
@@ -31,18 +41,13 @@ function App() {
         justifyContent: 'center',
         alignItems: 'center',
         padding: '20px',
-        zIndex: 1 // Ensure the content is on top of the overlay
+        zIndex: 1
       }}>
-        <h1 style={{
-          color: 'white',
-          textAlign: 'center',
-          fontSize: '4rem',  // Larger font size
-          fontWeight: 'bold',
-          marginBottom: '40px'  // More space below the title
-        }}>
-          Curated for your Curiosity
-        </h1>
-        <SearchBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/graph" element={<Graph />} />
+        </Routes>
+        <SearchBar onSearch={handleSearch} />
       </div>
       <div className="p-4" style={{ zIndex: 1 }}>
         {/* Your other content here */}

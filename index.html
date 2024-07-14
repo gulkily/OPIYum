@@ -1,62 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>3D Force-Directed Graph</title>
-    <style>
-        body { margin: 0; }
-        #3d-graph { width: 100vw; height: 100vh; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React App with Vite</title>
 </head>
 <body>
-    <div id="3d-graph"></div>
-    <script src="https://unpkg.com/3d-force-graph-vr"></script>
-    <script>
-        // Function to transform the original data into nodes and links
-        function transformData(data) {
-            const nodes = [];
-            const links = [];
-            const nodeSet = new Set();
-
-            data.forEach(item => {
-                const categoryNode = { id: item.category, group: 1 };
-                const expertNode = { id: item.expert, group: 2 };
-                const urlNode = { id: item.url, group: 3 };
-
-                if (!nodeSet.has(categoryNode.id)) {
-                    nodes.push(categoryNode);
-                    nodeSet.add(categoryNode.id);
-                }
-                if (!nodeSet.has(expertNode.id)) {
-                    nodes.push(expertNode);
-                    nodeSet.add(expertNode.id);
-                }
-                if (!nodeSet.has(urlNode.id)) {
-                    nodes.push(urlNode);
-                    nodeSet.add(urlNode.id);
-                }
-
-                links.push({ source: categoryNode.id, target: expertNode.id });
-                links.push({ source: expertNode.id, target: urlNode.id });
-            });
-
-            return { nodes, links };
-        }
-
-        // Load the JSON data and create the graph
-        fetch('dummy.json')
-            .then(response => response.json())
-            .then(data => {
-                const graphData = transformData(data);
-
-                const Graph = ForceGraphVR()
-                    (document.getElementById('3d-graph'))
-                    .graphData(graphData)
-                    .nodeLabel('id')
-                    .nodeAutoColorBy('group')
-                    .linkDirectionalParticles(2)
-                    .linkDirectionalParticleSpeed(d => d.value * 0.001);
-            });
-    </script>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>

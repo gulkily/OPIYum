@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+// SearchBar.js
+import React, { useState, useEffect } from 'react';
 
-const SearchBar = () => {
+const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
+
+  useEffect(() => {
+    console.log('SearchBar rendered');
+  });
 
   const handleInputChange = (e) => {
     setQuery(e.target.value);
@@ -9,7 +14,7 @@ const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Search query: ${query}`);
+    onSearch(query);
   };
 
   return (
