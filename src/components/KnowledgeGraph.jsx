@@ -1,4 +1,3 @@
-// KnowledgeGraph.js
 import React, { useEffect, useRef } from 'react';
 import data from './dummy.json'; // Adjust the path if necessary
 
@@ -63,7 +62,7 @@ const htmlContent = (data, selectedCategories) => `
 </html>
 `;
 
-const KnowledgeGraph = ({ width = '100%', height = '100%' }) => {
+const KnowledgeGraph = ({ width = '100%', height = '100%', selectedCategories }) => {
   const iframeRef = useRef(null);
 
   useEffect(() => {
@@ -71,7 +70,7 @@ const KnowledgeGraph = ({ width = '100%', height = '100%' }) => {
     const doc = iframe.contentDocument || iframe.contentWindow.document;
 
     doc.open();
-    doc.write(htmlContent(data));
+    doc.write(htmlContent(data, selectedCategories));
     doc.close();
 
     // Cleanup function to prevent multiple script loading issues
@@ -80,7 +79,7 @@ const KnowledgeGraph = ({ width = '100%', height = '100%' }) => {
       doc.write('');
       doc.close();
     };
-  }, []);
+  }, [selectedCategories]);
 
   return (
     <iframe
