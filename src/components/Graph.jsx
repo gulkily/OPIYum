@@ -12,7 +12,7 @@ import dummy from './dummy.json';
 
 
 
-const Graph = () => {
+const Graph = ({ selectedCategories, setSelectedCategories }) => {
   const [show3DGraph, setShow3DGraph] = useState(true);
   const [selectedCategories, setSelectedCategories] = useState([]); // State to manage selected categories
 
@@ -52,7 +52,7 @@ const Graph = () => {
             <CheckboxList items={items} onSelectionChange={handleSelectionChange} /> {/* Add the CheckboxList component */}
           </div>
           <div style={styles.right}>
-            {show3DGraph ? <KnowledgeGraph width="100%" height="100%" /> : <TwoDGraph width="100%" height="100%" />}
+            {show3DGraph ? <KnowledgeGraph width="100%" height="100%" /> : <TwoDim width="100%" height="100%" />}
           </div>
         </div>
         <button onClick={toggleGraph} style={styles.toggleButton}>

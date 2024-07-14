@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import data from './dummy.json'; // Adjust the path if necessary
 
-const htmlContent = (data) => `
+const htmlContent = (data, selectedCategories) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>

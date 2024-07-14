@@ -3,6 +3,8 @@ import Graph from "graphology";
 import Sigma from "sigma";
 import circular from "graphology-layout/circular";
 
+//USING THE CATEGORIES HERE FOR NOW
+
 const SimpleGraph = () => {
   const containerRef = useRef(null);
 
