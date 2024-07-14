@@ -155,7 +155,7 @@ def save_results(scraped_data):
         print(f"Failed to save data to 'updated_data.json': {e}")
 
 if __name__ == "__main__":
-    json_file = "urls.json"  # Replace with your JSON file path
+    json_file = "urls_descriptions.json"  # Replace with your JSON file path
     valid, invalid = validate_urls(json_file)
     
     if not valid and not invalid:
