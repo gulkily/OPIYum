@@ -1,9 +1,9 @@
 // Graph.js
 import React, { useState } from 'react';
 import KnowledgeGraph from './KnowledgeGraph';
-import TwoDGraph from './TwoDGraph'; // Import the 2D graph component
+//import TwoDGraph from './TwoDGraph'; // Import the 2D graph component
 import TileContainer from './TileContainer';
-import AdditionalComponent from './AdditionalComponent';
+//import AdditionalComponent from './AdditionalComponent';
 import CheckboxList from './CheckboxList'; // Import the CheckboxList component
 
 const Graph = ({ selectedCategories, setSelectedCategories }) => {
@@ -31,7 +31,7 @@ const Graph = ({ selectedCategories, setSelectedCategories }) => {
             {show3DGraph ? (
               <KnowledgeGraph width="100%" height="100%" selectedCategories={selectedCategories} />
             ) : (
-              <TwoDGraph width="100%" height="100%" />
+             <div></div> 
             )}
           </div>
         </div>
